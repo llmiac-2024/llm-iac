@@ -3,15 +3,15 @@ LLM-IaC is a repository to hold the code, data prompts, and results for generati
 
 llm-iac/
 
-├── prompts/              # Prompt files used for different LLMs
+├── Prompts/              # Prompt files used for different LLMs
 
-├── outputs/              # Generated IaC files from LLMs
+├── Outputs/              # Generated IaC files from LLMs
 
-├── data/                 # User queries and input sets
+├── Data/                 # User queries and input sets
 
-├── notebooks/            # Exploratory analysis and results
+├── Notebooks/            # Exploratory analysis and results
 
-├── scripts/              # Scripts to run and test LLMs
+├── Scripts/              # Scripts to run and test LLMs
 
 └── README.md             # This file
 
