@@ -1,1 +1,132 @@
+Prompts:
+
+Prompt for User-Query Generation
+prompt="""As an AI specialized in analyzing Terraform
+code : {}
+, your task is to examine the provided Terraform code and
+discern the complete set of user needs and intentions it
+addresses. Summarize the Terraform code to derive only a
+single comprehensive non-technical user query summarised
+in one sentence, the sentence should start with "Please
+generate a Terraform configuration for ". The query should
+represent a full and distinct requirement or input that
+could have led to the creation of this specific Terraform
+configuration. The summary should be concise and under-
+standable to a non-technical audience, adhering strictly to
+the information presented in the code. “””
+
+Prompt for Terraform Configuration Generation
+Zero-shot prompt=""""You are a Terraform consultant with
+expertise in AWS, Azure, and GCP. Your task is to develop
+a Terraform configuration based on the provided user query
+for the specified cloud provider. - *User Query:* {}
+- *Cloud Provider:* {} This Terraform configuration must
+include modules for essential components and design the
+modules to be reusable and easy to maintain. Adhere to the
+industry best practices for security and efficiency through-
+out the configuration. The output Terraform config should
+be in a structured format that is easy to understand and
+implement.""" 
+
+Few-shot prompt="""You are a Terraform
+consultant with expertise in AWS, Azure, and GCP. Your
+task is to develop a Terraform configuration based on
+the provided user query for the specified cloud provider.
+Please use the Terraform User Queries and Terraform
+configurations (User Query1, Terraform Configuration1;
+User Query2, Terraform Configuration2) provided as a ref-
+erence to generate a new complete Terraform configuration
+based on the provided user query for the specified cloud
+provider which meets Terraform generated code quality
+considerations - *User Query:* {}
+- *Cloud Provider:* {}
+- *User Query1:* {}
+- *Terraform Configuration1:* {}
+- *User Query2:* {}
+- *Terraform Configuration2:* {}
+“””
+
+
+Prompt for Terraform Validation
+evaluate_terraform_prompt="""You are an expert Terraform validator specializing in validating infrastructure as code for cloud environments.
+For generated Terraform code, below nine evaluation axes for Terraform code quality are defined.
+
+Correctness: The generated code must be syntactically correct and adhere to Terraform’s language standards.
+All necessary resources must be correctly defined and referenced, outputs and variables should be correctly declared and used, enabling reusability and modularity.
+Running terraform plan and terraform apply should not produce errors.
+
+Idempotency:Applying the code multiple times should not produce different results. Terraform code should be idempotent, meaning it only makes changes when needed.
+
+Security: The generated code should ensure sensitive data (like secrets or private keys) is handled securely, avoiding hardcoding and using appropriate mechanisms like environment variables or secure storage solutions.
+IAM roles and policies should follow the principle of least privilege, granting only necessary permissions.
+
+Performance and Efficiency:The generated code should optimize resource usage, avoiding unnecessary or over-provisioning of resources.
+The code should be modular and reusable, with logical separation of components using Terraform modules.
+
+Scalability:The code should be scalable and capable of handling increased load without significant modifications.The use of variables should allow easy scaling of the infrastructure
+
+Documentation and Readability:The code should be well-documented with comments explaining complex sections.The code should
+use consistent and descriptive naming conventions for resources, variables, and outputs.
+
+Compliance:The generated code should comply with organizational policies and industry standards.The code should be easily auditable, with clear logging and versioning.
+
+Modularity and Reusability: The generated code should make use of Terraform modules for reusability.There should be use of variables to control the behavior of the code, making it adaptable to different environments.
+
+Overall Quality: This axis answers the question “How good is the overall Terraform code quality. This can
+encompass all of the above axes of quality, as well as others you feel are important.  If it’s hard to find ways to make
+the Terraform configuration better, the overall quality is good.  If thereare lots of different ways the Terraform configuration can be made better,
+the overall quality is bad.
+Given a Cloud configuration User query and the generated Terraform Code for the User query 
+
+User query :{}
+Microsoft one_shot Generated Terraform Code : {}
+
+
+Considering the Correctness, Idempotency, Security, Performance and Efficiency, Scalability, Documentation and Readability, Compliance, Modularity and Reusability, Compliance
+and Overall Quality of the Terraform Code as defined above, provide the Terraform code with a overall score and with a Rationale for the score
+Score:
+Rationale:
+Please provide the results in a JSON format like example:
+{{
+  "Score": ,
+  "Rationale": {{
+    "Correctness": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Idempotency": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Security": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Performance and Efficiency": {{
+      "score": ,
+      "comments": ""
+    }},
+"Scalability": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Documentation and Readability": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Compliance": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Modularity and Reusability": {{
+      "score": ,
+      "comments": ""
+    }},
+    "Overall Quality": {{
+      "score": ,
+      "comments": ""
+    }}
+  }}
+}}
+"""
 
