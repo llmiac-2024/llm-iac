@@ -11,8 +11,6 @@ llm-iac/
 
 ├── Notebooks/            # Exploratory analysis and results
 
-├── Scripts/              # Scripts to run and test LLMs
-
 └── README.md             # This file
 
 Techniques Used
